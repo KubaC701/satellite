@@ -15,8 +15,10 @@ const SatelliteImage = ({ location }) => {
   };
 
   useEffect(() => {
-    fetchImage();
-  }, []);
+    if (location) {
+      fetchImage();
+    }
+  }, [location]);
 
   return (
     <Box
