@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import { Container, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import throttle from 'lodash.throttle';
-import { Container } from '@material-ui/core';
 
 const Search = ({ location, setLocation, className }) => {
   const [query, setQuery] = useState('');
@@ -48,14 +47,12 @@ const Search = ({ location, setLocation, className }) => {
   return (
     <Container maxWidth="sm" className={className}>
       <Autocomplete
+        autoComplete
+        filterOptions={(x) => x}
+        filterSelectedOptions
         forcePopupIcon={false}
         getOptionLabel={(option) => option.display_name}
-        filterOptions={(x) => x}
-        options={options}
-        autoComplete
         includeInputInList
-        filterSelectedOptions
-        value={location}
         onChange={(_event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
           setLocation(newValue);
@@ -63,10 +60,12 @@ const Search = ({ location, setLocation, className }) => {
         onInputChange={(_event, newValue) => {
           setQuery(newValue);
         }}
+        options={options}
         renderInput={(params) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
           <TextField {...params} label="Search location" fullWidth />
         )}
+        value={location}
       />
     </Container>
   );
@@ -77,11 +76,11 @@ Search.defaultProps = {
 };
 
 Search.propTypes = {
+  className: PropTypes.string.isRequired,
   location: PropTypes.objectOf(PropTypes.oneOfType(
     [PropTypes.string, PropTypes.number, PropTypes.array],
   )),
   setLocation: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
 };
 
 export default Search;
