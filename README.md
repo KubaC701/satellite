@@ -12,13 +12,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Core assumptions
 
-This app is created to browse the NASA satellite images from any location you want. After selecting an interesting location the image from the satellite and map of this location will appear. 
+This app is created to browse the NASA satellite images from any location you want.
+After selecting an interesting location the image from the satellite and map of this location will appear.
 
 ## Components
 
 ### Map
 
-The map component creates a `leaflet` map. It uses a global `L` variable provided by the script loaded in `index.html`. The map is listening to coordinates changes and update its own view according to new data.
+The map component creates a `leaflet` map.
+It uses a global `L` variable provided by the script loaded in `index.html`.
+The map is listening to coordinates changes and update its own view according to new data.
 
 ### SatelliteImage
 
@@ -34,7 +37,15 @@ When a user finished typing, the throttled `fetchData` function fires after 200m
 This function fetches data from `OpenStreetMap` to display a list of locations based on the user query.
 After adding the new results to the list of options the component passes the selected location up to the `App` component.
 
+## Hooks
+
+### useFetch
+
+`useFetch` hook handles fetch requests and allows reuse fetch logic.
+It returns array of `data`, `isLoading` and `isError`.
+
 ## Libraries used in this project
+
 - `React`
 - `Material UI`
 - `lodash.throttle`
