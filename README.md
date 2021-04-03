@@ -34,7 +34,7 @@ The component handles loading state and display `CircularProgress` when the imag
 ### Search
 
 The search component uses the `Autocomplete` component from Material UI.
-When a user finished typing, the throttled `fetchData` function fires after 200ms.
+When a user finished typing, the debounced `fetchData` function fires after 200ms.
 This function fetches data from `OpenStreetMap` to display a list of locations based on the user query.
 After adding the new results to the list of options the component passes the selected location up to the `App` component.
 
@@ -42,7 +42,7 @@ After adding the new results to the list of options the component passes the sel
 
 - `React`
 - `Material UI`
-- `lodash.throttle`
+- `lodash.debounce`
 - `PropTypes`
 - `node-sass`
 - `eslint`

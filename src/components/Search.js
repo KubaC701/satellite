@@ -2,18 +2,18 @@ import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
 
 const Search = ({ location, setLocation, className }) => {
   const [query, setQuery] = useState('');
   const [options, setOptions] = useState([]);
-  const THROTTLED_WAIT = 200;
+  const DEBOUNCED_WAIT = 200;
 
-  const fetchData = useMemo(() => throttle(async (input, callback) => {
+  const fetchData = useMemo(() => debounce(async (input, callback) => {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${input}`);
     const locations = await response.json();
     callback(locations);
-  }, THROTTLED_WAIT), []);
+  }, DEBOUNCED_WAIT), []);
 
   useEffect(() => {
     let active = true;
