@@ -1,4 +1,5 @@
 import { Box, CssBaseline, Typography } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useState } from 'react';
 import SatelliteImage from './components/SatelliteImage';
@@ -10,6 +11,9 @@ const App = () => {
       type: 'dark',
       primary: {
         main: '#F8F8F8',
+      },
+      secondary: {
+        main: blue[700],
       },
       text: {
         primary: '#F8F8F8',

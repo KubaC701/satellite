@@ -1,21 +1,35 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box } from '@material-ui/core';
+import { Box, CircularProgress } from '@material-ui/core';
 
 const SatelliteImage = ({ location }) => {
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const fetchImage = async () => {
     const { lon, lat } = location;
+    setIsLoading(true);
     const res = await fetch(`https://api.nasa.gov/planetary/earth/imagery?lon=${lon}&lat=${lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}`);
     const blob = await res.blob();
     setImage(URL.createObjectURL(blob));
+    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchImage();
   }, []);
 
-  return <Box width={1 / 2}><img src={image} alt="" /></Box>;
+  return (
+    <Box
+      width={1 / 2}
+      height={1}
+      bgcolor="primary.main"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+    >
+      {isLoading ? <CircularProgress color="secondary" /> : <img src={image} alt="" />}
+    </Box>
+  );
 };
 
 SatelliteImage.defaultProps = {
