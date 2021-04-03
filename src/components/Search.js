@@ -65,7 +65,7 @@ const Search = ({ location, setLocation }) => {
         }}
         renderInput={(params) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField {...params} label="Add a location" fullWidth />
+          <TextField {...params} label="Search location" fullWidth />
         )}
       />
     </Container>
