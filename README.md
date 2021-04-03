@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 4. Run `yarn start` command
 5. Go to http://localhost:3000
 
-## Core assumptions
+## Project description
 
 This app is created to browse the NASA satellite images from any location you want.
 After selecting an interesting location the image from the satellite and map of this location will appear.
@@ -36,13 +36,6 @@ The search component uses the `Autocomplete` component from Material UI.
 When a user finished typing, the throttled `fetchData` function fires after 200ms.
 This function fetches data from `OpenStreetMap` to display a list of locations based on the user query.
 After adding the new results to the list of options the component passes the selected location up to the `App` component.
-
-## Hooks
-
-### useFetch
-
-`useFetch` hook handles fetch requests and allows reuse fetch logic.
-It returns array of `data`, `isLoading` and `isError`.
 
 ## Libraries used in this project
 

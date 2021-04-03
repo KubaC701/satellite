@@ -1,14 +1,40 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, CircularProgress, Typography } from '@material-ui/core';
-import Icon from '@material-ui/core/Icon';
-import useFetch from '../hooks/useFetch';
+import {
+  Box, CircularProgress, Icon, Typography,
+} from '@material-ui/core';
 
 const SatelliteImage = ({ location }) => {
-  const [image, isLoading, isError] = useFetch(
-    `https://api.nasa.gov/planetary/earth/imagery?lon=${location.lon}&lat=${location.lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}&dim=0.09`,
-    { isBlob: true },
-    [location],
-  );
+  const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const fetchImage = async () => {
+    setIsLoading(true);
+    setIsError(false);
+    const { lon, lat } = location;
+
+    try {
+      const res = await fetch(`https://api.nasa.gov/planetary/earth/imagery?lon=${lon}&lat=${lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}&dim=0.09`);
+      if (!res.ok) {
+        const { msg } = await res.json();
+        throw new Error(msg);
+      }
+      const blob = await res.blob();
+      setImage(URL.createObjectURL(blob));
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (location) {
+      fetchImage();
+    }
+  }, [location]);
+
   return (
     <Box
       alignItems="center"
