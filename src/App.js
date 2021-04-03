@@ -45,11 +45,12 @@ const App = () => {
           timeout={600}
           unmountOnExit
         >
-          <Box marginTop={8} maxHeight="100vh">
+          <Box marginTop={8}>
             <Grid
               container
               direction={isMobile ? 'column' : 'row'}
               spacing={2}
+              wrap="nowrap"
             >
               <Grid item xs>
                 <SatelliteImage location={location} />
