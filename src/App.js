@@ -1,9 +1,10 @@
 import {
-  Box, Container, CssBaseline, Typography,
+  Box, Container, CssBaseline, Grid, Typography,
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useState } from 'react';
+import Map from './components/Map';
 import SatelliteImage from './components/SatelliteImage';
 import Search from './components/Search';
 
@@ -41,7 +42,18 @@ const App = () => {
           <Typography variant="h1" align="center">Satellite</Typography>
         </Box>
         <Search location={location} setLocation={setLocation} />
-        {location && <SatelliteImage location={location} />}
+        {location && (
+          <Box marginTop={8}>
+            <Grid spacing={2} container>
+              <Grid item xs>
+                <SatelliteImage location={location} />
+              </Grid>
+              <Grid item xs>
+                <Map lat={location.lat} lon={location.lon} />
+              </Grid>
+            </Grid>
+          </Box>
+        )}
       </Container>
     </ThemeProvider>
   );
