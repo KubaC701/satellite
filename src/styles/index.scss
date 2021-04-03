@@ -1,0 +1,14 @@
+.app {
+  height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+.background {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
