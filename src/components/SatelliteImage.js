@@ -1,26 +1,14 @@
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, CircularProgress } from '@material-ui/core';
+import { Box, CircularProgress, Typography } from '@material-ui/core';
+import Icon from '@material-ui/core/Icon';
+import useFetch from '../hooks/useFetch';
 
 const SatelliteImage = ({ location }) => {
-  const [image, setImage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchImage = async () => {
-    const { lon, lat } = location;
-    setIsLoading(true);
-    const res = await fetch(`https://api.nasa.gov/planetary/earth/imagery?lon=${lon}&lat=${lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}&dim=0.09`);
-    const blob = await res.blob();
-    setImage(URL.createObjectURL(blob));
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    if (location) {
-      fetchImage();
-    }
-  }, [location]);
-
+  const [image, isLoading, isError] = useFetch(
+    `https://api.nasa.gov/planetary/earth/imagery?lon=${location.lon}&lat=${location.lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}&dim=0.09`,
+    { isBlob: true },
+    [location],
+  );
   return (
     <Box
       alignItems="center"
@@ -30,6 +18,12 @@ const SatelliteImage = ({ location }) => {
       justifyContent="center"
     >
       {isLoading ? <CircularProgress color="secondary" /> : <img src={image} alt="" />}
+      {isError && (
+        <>
+          <Icon color="error" fontSize="large">error</Icon>
+          <Typography color="error">Something went wrong!</Typography>
+        </>
+      )}
     </Box>
   );
 };

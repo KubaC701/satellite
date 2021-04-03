@@ -13,7 +13,6 @@ export default (url, { isBlob } = {}, dependencies = []) => {
         const res = await fetch(url);
         if (!res.ok) {
           const { msg } = await res.json();
-          console.log(msg);
           throw new Error(msg);
         }
         if (isBlob) {
