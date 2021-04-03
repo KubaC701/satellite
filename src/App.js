@@ -1,5 +1,5 @@
 import {
-  Box, Container, CssBaseline, Grid, Slide, Typography,
+  Box, Container, CssBaseline, Grid, Slide, Typography, useMediaQuery,
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -30,10 +30,15 @@ const App = () => {
       h1: {
         fontWeight: 700,
         fontSize: 80,
+        '@media (max-width:400px)': {
+          fontSize: 60,
+        },
       },
     },
   });
   const [location, setLocation] = useState(null);
+  const isMobile = useMediaQuery('(max-width:600px)');
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -62,8 +67,8 @@ const App = () => {
           />
         </div>
         <Slide direction="up" in={!!location} mountOnEnter unmountOnExit timeout={600}>
-          <Box marginTop={8}>
-            <Grid spacing={2} container>
+          <Box marginTop={8} maxHeight="100vh">
+            <Grid spacing={2} container direction={isMobile ? 'column' : 'row'}>
               <Grid item xs>
                 <SatelliteImage location={location} />
               </Grid>

@@ -17,7 +17,7 @@ const Map = ({ lat, lon }) => {
     map.current.setView([lat, lon], ZOOM);
   }, [lat, lon]);
 
-  return <div id="map" style={{ height: '100%' }} />;
+  return <div id="map" style={{ height: '100%', aspectRatio: '1 / 1' }} />;
 };
 
 Map.defaultProps = {
