@@ -7,12 +7,13 @@ import throttle from 'lodash.throttle';
 const Search = ({ location, setLocation, className }) => {
   const [query, setQuery] = useState('');
   const [options, setOptions] = useState([]);
+  const THROTTLED_WAIT = 200;
 
   const fetchData = useMemo(() => throttle(async (input, callback) => {
     const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${input}`);
     const locations = await response.json();
     callback(locations);
-  }, 200), []);
+  }, THROTTLED_WAIT), []);
 
   useEffect(() => {
     let active = true;
