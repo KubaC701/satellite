@@ -8,7 +8,7 @@ const SatelliteImage = ({ location }) => {
   const fetchImage = async () => {
     const { lon, lat } = location;
     setIsLoading(true);
-    const res = await fetch(`https://api.nasa.gov/planetary/earth/imagery?lon=${lon}&lat=${lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}`);
+    const res = await fetch(`https://api.nasa.gov/planetary/earth/imagery?lon=${lon}&lat=${lat}&api_key=${process.env.REACT_APP_NASA_API_KEY}&dim=0.09`);
     const blob = await res.blob();
     setImage(URL.createObjectURL(blob));
     setIsLoading(false);
