@@ -1,6 +1,7 @@
 # Satellite - NASA API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Live demo: dreamy-lalande-9cfe32.netlify.app/
 
 ## Installation & Running project locally
 
