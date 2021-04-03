@@ -21,6 +21,9 @@ const App = () => {
       text: {
         primary: '#F8F8F8',
       },
+      background: {
+        default: '#000',
+      },
     },
     typography: {
       fontFamily: 'Raleway',
@@ -35,7 +38,11 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box position="absolute" height={1} width={1} zIndex={-1}>
-        <img src="/images/space.jpg" alt="View of Earth from space" className="background" />
+        <img
+          src="/images/space.jpg"
+          alt="View of Earth from space"
+          className={`background ${location && 'background--invisible'}`}
+        />
       </Box>
       <Container>
         <div>
