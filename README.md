@@ -1,35 +1,44 @@
-# Getting Started with Create React App
+# Satellite - NASA API
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Installation & Running project locally
 
-In the project directory, you can run:
+1. Clone the repo
+2. Run `yarn` command
+3. Add environment variables in `.env.development.local` file based on `.env.example`
+4. Run `yarn start` command
+5. Go to http://localhost:3000
 
-### `yarn start`
+## Core assumptions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This app is created to browse the NASA satellite images from any location you want. After selecting an interesting location the image from the satellite and map of this location will appear. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Components
 
-### `yarn build`
+### Map
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The map component creates a `leaflet` map. It uses a global `L` variable provided by the script loaded in `index.html`. The map is listening to coordinates changes and update its own view according to new data.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### SatelliteImage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Satellite image displays fetched image from NASA API.
+`REACT_APP_NASA_API_KEY` is required to make a proper request.
+It fetches a new image every time when `location` prop will be changed.
+The component handles loading state and display `CircularProgress` when the image is fetching.
 
-### `yarn eject`
+### Search
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The search component uses the `Autocomplete` component from Material UI.
+When a user finished typing, the throttled `fetchData` function fires after 200ms.
+This function fetches data from `OpenStreetMap` to display a list of locations based on the user query.
+After adding the new results to the list of options the component passes the selected location up to the `App` component.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Libraries used in this project
+- `React`
+- `Material UI`
+- `lodash.throttle`
+- `PropTypes`
+- `node-sass`
+- `eslint`
+- `stylelint`
