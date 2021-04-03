@@ -1,4 +1,6 @@
-import { Box, CssBaseline, Typography } from '@material-ui/core';
+import {
+  Box, Container, CssBaseline, Typography,
+} from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useState } from 'react';
@@ -31,14 +33,16 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="app">
-        <img src="/images/space.jpg" alt="" className="background" />
+      <Box position="absolute" height={1} width={1} zIndex={-1}>
+        <img src="/images/space.jpg" alt="View of Earth from space" className="background" />
+      </Box>
+      <Container>
         <Box paddingTop={6} paddingBottom={2}>
           <Typography variant="h1" align="center">Satellite</Typography>
         </Box>
         <Search location={location} setLocation={setLocation} />
         {location && <SatelliteImage location={location} />}
-      </div>
+      </Container>
     </ThemeProvider>
   );
 };
