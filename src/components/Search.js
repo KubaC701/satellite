@@ -5,7 +5,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import throttle from 'lodash.throttle';
 import { Container } from '@material-ui/core';
 
-const Search = ({ location, setLocation }) => {
+const Search = ({ location, setLocation, className }) => {
   const [query, setQuery] = useState('');
   const [options, setOptions] = useState([]);
 
@@ -46,7 +46,7 @@ const Search = ({ location, setLocation }) => {
   }, [location, query, fetchData]);
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" className={className}>
       <Autocomplete
         forcePopupIcon={false}
         getOptionLabel={(option) => option.display_name}
@@ -81,6 +81,7 @@ Search.propTypes = {
     [PropTypes.string, PropTypes.number, PropTypes.array],
   )),
   setLocation: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default Search;

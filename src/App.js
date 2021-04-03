@@ -1,5 +1,5 @@
 import {
-  Box, Container, CssBaseline, Grid, Typography,
+  Box, Container, CssBaseline, Grid, Slide, Typography,
 } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -38,22 +38,34 @@ const App = () => {
         <img src="/images/space.jpg" alt="View of Earth from space" className="background" />
       </Box>
       <Container>
-        <Box paddingTop={6} paddingBottom={2}>
-          <Typography variant="h1" align="center">Satellite</Typography>
-        </Box>
-        <Search location={location} setLocation={setLocation} />
-        {location && (
+        <div>
+          <Box paddingTop={6} paddingBottom={2}>
+            <Typography
+              variant="h1"
+              align="center"
+              className={`heading ${location && 'heading--small'}`}
+            >
+              Satellite
+            </Typography>
+          </Box>
+          <Search
+            location={location}
+            setLocation={setLocation}
+            className={`search ${location && 'search--small'}`}
+          />
+        </div>
+        <Slide direction="up" in={!!location} mountOnEnter unmountOnExit timeout={600}>
           <Box marginTop={8}>
             <Grid spacing={2} container>
               <Grid item xs>
                 <SatelliteImage location={location} />
               </Grid>
               <Grid item xs>
-                <Map lat={location.lat} lon={location.lon} />
+                <Map lat={location?.lat} lon={location?.lon} />
               </Grid>
             </Grid>
           </Box>
-        )}
+        </Slide>
       </Container>
     </ThemeProvider>
   );

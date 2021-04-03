@@ -20,8 +20,7 @@ const SatelliteImage = ({ location }) => {
 
   return (
     <Box
-      width={1 / 2}
-      height={1}
+      className="box"
       bgcolor="primary.main"
       display="flex"
       alignItems="center"

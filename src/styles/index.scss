@@ -1,3 +1,9 @@
+$transition: transform 0.4s ease-in-out;
+
+body {
+  overflow: hidden;
+}
+
 .background {
   height: 100%;
   object-fit: cover;
@@ -7,4 +13,40 @@
 
 img {
   max-width: 100%;
+}
+
+.heading {
+  transform-origin: top;
+  transition: $transition;
+
+  &--small {
+    transform: translateY(-20px) scale(0.5);
+  }
+}
+
+.search {
+  transition: $transition;
+
+  &--small {
+    transform: translateY(-4rem);
+  }
+}
+
+.box {
+  aspect-ratio: 1 / 1;
+
+  @supports not (aspect-ratio: 1 / 1) {
+    height: 0;
+    overflow: hidden;
+    padding-top: 100%;
+    position: relative;
+
+    * {
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
 }

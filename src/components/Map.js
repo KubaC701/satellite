@@ -14,9 +14,14 @@ const Map = ({ lat, lon }) => {
   return <div id="map" style={{ height: '100%' }} />;
 };
 
+Map.defaultProps = {
+  lat: '',
+  lon: '',
+};
+
 Map.propTypes = {
-  lat: PropTypes.string.isRequired,
-  lon: PropTypes.string.isRequired,
+  lat: PropTypes.string,
+  lon: PropTypes.string,
 };
 
 export default Map;
