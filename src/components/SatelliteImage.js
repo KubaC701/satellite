@@ -5,6 +5,7 @@ import { Box, CircularProgress } from '@material-ui/core';
 const SatelliteImage = ({ location }) => {
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
   const fetchImage = async () => {
     const { lon, lat } = location;
     setIsLoading(true);
@@ -22,10 +23,10 @@ const SatelliteImage = ({ location }) => {
 
   return (
     <Box
-      className="box"
-      bgcolor="primary.main"
-      display="flex"
       alignItems="center"
+      bgcolor="primary.main"
+      className="box"
+      display="flex"
       justifyContent="center"
     >
       {isLoading ? <CircularProgress color="secondary" /> : <img src={image} alt="" />}
